@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Pixi Concentration</title>
+		<style>
+			body {
+				margin:0;
+				padding:0;
+			}
+		</style>
+		<script src="pixi.dev.js"></script>
+	</head>
+	<body>
+		<script>
+			// first tile picked by player
+			var firstTile = null;
+			// second tile picked by player
+			var secondTile = null;
+			// can player pick a tile?
+			var canPick = true;
+			// create a new instance of a pixi stage with grey background
+			var stage = new PIXI.Stage(0x888888);
+			// create a renderer instance with width=640 height=480
+			var renderer = PIXI.autoDetectRenderer(480,320);
+			// import a texture atlast create with texturepacker
+			var tileAtlas = ["imags2.json"]
+			// create a new loader
+			var loader = new PIXI.AssetLoader(tileAtlas);
+			// create an empty container
+			var gameContainer = new PIXI.DisplayObjectContainer();
+			// add the container to the stage
+			stage.addChild(gameContainer);
+			// add then renderer view element to the DOM
+			document.body.appendChild(renderer.view);
+			// use callback
+			loader.onComplete = onTilesLoaded;
+			// begin load
+			loader.load();
+
+			function onTilesLoaded() {
+				// choose 12 random tile images
+				var chosenTiles=new Array();
+				while(chosenTiles.length<24) {
+					// 44 images in file
+					var candidate=Math.floor(Math.random()*12);
+					if(chosenTiles.indexOf(candidate)==-1) {
+						// push two on bc pairs
+						chosenTiles.push(candidate,candidate);
+					}
+				}
+				// shuffle the tiles
+				for(i=0;i<96;i++) {
+					var from = Math.floor(Math.random()*24);
+					var to = Math.floor(Math.random()*24);
+					var tmp = chosenTiles[from];
+					chosenTiles[from] = chosenTiles[to];
+					chosenTiles[to] = tmp;
+				}
+				// place down tiles
+				for(i=0;i<6;i++) {
+					for(j=0;j<4;j++) {
+						// new sprite
+						var tile = PIXI.Sprite.fromFrame(chosenTiles[i*4+j]);
+						// buttonmMode + interactive = acts like a buttom
+						tile.buttonMode = true;
+						tile.interactive = true;
+						// is this tile selected?
+						tile.isSelected = false;
+						// set a tile value
+						tile.theVal = chosenTiles[i*4+j];
+						// place the tile
+						tile.position.x = 7+i*80;
+						tile.position.y = 7+j*80;
+						// paint tile black
+						tile.tint = 0x000000;
+						// set it a bit transparent (looking gray)
+						tile.alpha=0.5;
+						// add the tile
+						gameContainer.addChild(tile);
+						// mouse-touch listener
+						tile.mousedown = tile.touchstart = function(data) {
+							if(canPick) {
+								// is it already selecteD?
+								if(!this.isSelected) {
+									this.isSelected = true;
+									//show tile
+									this.tint = 0xffffff;
+									this.alpha = 1;
+									// first tile we uncover?
+									if (firstTile == null) {
+										firstTile = this
+									}
+									// second tile
+									else {
+										secondTile = this;
+										canPick = false;
+										// did we pick same tiles?
+										if (firstTile.theVal == secondTile.theVal) {
+											// wait a second (!)
+											setTimeout(function() {
+												gameContainer.removeChild(firstTile);
+												gameContainer.removeChild(secondTile);
+												firstTile = null;
+												secondTile = null;
+												canPick = true;
+											},1000);
+										}
+										else {
+											// wait a second, recover tiles
+											setTimeout(function() {
+												firstTile.isSelected = false;
+												secondTile.isSelected = false;
+												firstTile.tint = 0x000000;
+												secondTile.tint = 0x000000;
+												firstTile.alpha=0.5;
+												secondTile.alpha=0.5;
+												firstTile=null;
+												secondTile=null;
+												canPick=true;
+											},1000);
+
+										}
+									}
+
+								}
+							}
+						}
+					}
+					
+				}
+				requestAnimFrame(animate);
+			}
+
+			function animate() {
+				requestAnimFrame(animate);
+				renderer.render(stage);
+			}
+		</script>
+	</body>
+</html>
