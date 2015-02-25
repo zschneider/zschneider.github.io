@@ -21,6 +21,7 @@
     <h1 class="text-center"><strong>CAN I FUCKING RECYCLE THIS?</strong></h1>
     <hr>
     <h3 class="text-center">Question #1: What kinda fucking material is it?</h3>
+    <br>
     <div id="hideall">
     	<div class="panel">
 		    <div class="row">
@@ -44,11 +45,47 @@
 		    	</div>
 		    </div>
 
-		    <div class="row collapse" id="paperResults">
-		    	<div class="col-md-6 col-md-offset-3">
-		    		<p class="text-center h1"> COMPOST THAT SHIT. </p>
-		    	</div>
-		    </div>
+		    <!-- Next level of content -->
+		    <div class="collapse" id="paperResults">
+			    <div class="row">
+			    	<div class="col-md-6 col-md-offset-3">
+			    		<p class="text-center h3"> Question #2: What the fuck is it? </p>
+			    	</div>
+			    </div>
+			    <div class="row" id="paperMaterialButtons">
+			    	<div class="col-md-2 col-xs-2">
+		    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#paperRecycling">Corrugated Cardboard</button>
+		    		</div>
+		    		<div class="col-md-2 col-xs-2">
+		    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#paperRecycling">Magazines</button>
+		    		</div>
+		    		<div class="col-md-2 col-xs-2">
+		    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#paperRecycling">Newspapers</button>
+		    		</div>
+		    		<div class="col-md-2 col-xs-2">
+		    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#paperRecycling">Paperboard</button>
+		    		</div>
+		    		<div class="col-md-2 col-xs-2">
+		    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#paperRecycling">Office Paper</button>
+		    		</div>
+		    		<div class="col-md-2 col-xs-2">
+		    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#otherPaper">Other Paper Shit</button>
+		    		</div>
+			    </div>
+			    <div class="row collapse" id="paperRecycling">
+			    	<p class="text-center h3">Question #3: Why the fuck haven't you recycled it yet?</p>
+			    	<p class="text-center h1">YUP. IT'S FUCKING RECYCLABLE.</p>
+			    	<p class="text-center h4">Most community recycling programs offer curbside pickup for paper products.</p>
+			    	<p class="text-center h4">If you don't have curbside pickup, or want to earn some fucking free money, find your nearest recycling center here.</p>
+			    </div>
+			    <div class="row collapse" id="otherPaper">
+			    	<p class="text-center h3">Question #3: Why the fuck haven't you recycled it yet?</p>
+			    	<p class="text-center h1">IT'S PROBABLY FUCKING RECYCLABLE.</p>
+			    	<p class="text-center h4">Most community recycling programs offer curbside pickup for paper products.</p>
+			    	<p class="text-center h4">If you don't have curbside pickup, or want to earn some fucking free money, find your nearest recycling center here.</p>
+			    	<p class="text-center h4">LIST THINGS HERE</p>
+			    </div>
+			</div>
 		    <div class="row collapse" id="metalResults">
 		    	<div class="col-md-6 col-md-offset-3">
 		    		<p class="text-center h1"> Metals. TBD. </p>
