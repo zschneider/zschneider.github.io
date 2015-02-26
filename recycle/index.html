@@ -10,6 +10,9 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,67 +28,135 @@
     <div id="hideall">
     	<div class="panel">
 		    <div class="row">
-		    	<div class="col-md-2 col-xs-2">
+		    	<div class="col-md-2">
 		    		<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#paperResults" data-parent="#hideall">Paper</button>
 		    	</div>
-		    	<div class="col-md-2 col-xs-2">
+		    	<div class="col-md-2">
 		    		<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#metalResults" data-parent="#hideall">Metal</button>
 		    	</div>
-		    	<div class="col-md-2 col-xs-2">
+		    	<div class="col-md-2">
 		    		<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#glassResults" data-parent="#hideall">Glass</button>
 		    	</div>
-		    	<div class="col-md-2 col-xs-2">
+		    	<div class="col-md-2">
 		    		<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#plasticResults" data-parent="#hideall">Plastic</button>
 		    	</div>
-		    	<div class="col-md-2 col-xs-2">
+		    	<div class="col-md-2">
 		    		<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#foodResults" data-parent="#hideall">Food</button>
 		    	</div>
-		    	<div class="col-md-2 col-xs-2">
+		    	<div class="col-md-2">
 		    		<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#electronicResults" data-parent="#hideall">Electronic</button>
 		    	</div>
 		    </div>
 
 		    <!-- Next level of content -->
 		    <div class="collapse" id="paperResults">
-			    <div class="row">
-			    	<div class="col-md-6 col-md-offset-3">
-			    		<p class="text-center h3"> Question #2: What the fuck is it? </p>
-			    	</div>
-			    </div>
-			    <div class="row" id="paperMaterialButtons">
-			    	<div class="col-md-2 col-xs-2">
-		    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#paperRecycling">Corrugated Cardboard</button>
-		    		</div>
-		    		<div class="col-md-2 col-xs-2">
-		    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#paperRecycling">Magazines</button>
-		    		</div>
-		    		<div class="col-md-2 col-xs-2">
-		    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#paperRecycling">Newspapers</button>
-		    		</div>
-		    		<div class="col-md-2 col-xs-2">
-		    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#paperRecycling">Paperboard</button>
-		    		</div>
-		    		<div class="col-md-2 col-xs-2">
-		    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#paperRecycling">Office Paper</button>
-		    		</div>
-		    		<div class="col-md-2 col-xs-2">
-		    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#otherPaper">Other Paper Shit</button>
-		    		</div>
-			    </div>
-			    <div class="row collapse" id="paperRecycling">
-			    	<p class="text-center h3">Question #3: Why the fuck haven't you recycled it yet?</p>
-			    	<p class="text-center h1">YUP. IT'S FUCKING RECYCLABLE.</p>
-			    	<p class="text-center h4">Most community recycling programs offer curbside pickup for paper products.</p>
-			    	<p class="text-center h4">If you don't have curbside pickup, or want to earn some fucking free money, find your nearest recycling center here.</p>
-			    </div>
-			    <div class="row collapse" id="otherPaper">
-			    	<p class="text-center h3">Question #3: Why the fuck haven't you recycled it yet?</p>
-			    	<p class="text-center h1">IT'S PROBABLY FUCKING RECYCLABLE.</p>
-			    	<p class="text-center h4">Most community recycling programs offer curbside pickup for paper products.</p>
-			    	<p class="text-center h4">If you don't have curbside pickup, or want to earn some fucking free money, find your nearest recycling center here.</p>
-			    	<p class="text-center h4">LIST THINGS HERE</p>
-			    </div>
+		    	<div class="panel">
+				    <div class="row">
+				    	<div class="col-md-6 col-md-offset-3">
+				    		<p class="text-center h3"> Question #2: What the fuck is it? </p>
+				    		<br>
+				    	</div>
+				    </div>
+				    <div class="row" id="paperMaterialButtons">
+				    	<div class="col-md-2">
+			    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#ccRecycling" data-parent="#paperResults">Corrugated Cardboard</button>
+			    		</div>
+			    		<div class="col-md-2">
+			    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#mzRecycling" data-parent="#paperResults">Magazines</button>
+			    		</div>
+			    		<div class="col-md-2">
+			    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#npRecycling" data-parent="#paperResults">Newspapers</button>
+			    		</div>
+			    		<div class="col-md-2">
+			    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#pbRecycling" data-parent="#paperResults">Paperboard</button>
+			    		</div>
+			    		<div class="col-md-2">
+			    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#opRecycling" data-parent="#paperResults">Office Paper</button>
+			    		</div>
+			    		<div class="col-md-2">
+			    			<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#othpRecycling" data-parent="#paperResults">Other Paper Shit</button>
+			    		</div>
+				    </div>
+				    <div class="row collapse" id="ccRecycling">
+				    	<div class="col-md-6 col-md-offset-3">
+					    	<p class="text-center h3">Question #3: Why the fuck haven't you recycled it yet?</p>
+					    	<p class="text-center h1">YUP. IT'S FUCKING RECYCLABLE.</p>
+					    	<br>
+					    	<p class="text-center h4">Corrugated cardboard is what the random bullshit package your aunt sent you was shipped in.</p>
+					    	<p class="text-center h4">When recycled, it can be turned into other paper products.</p>
+					    	<br>
+					    	<p class="text-center h4">Most community recycling programs offer curbside pickup for paper products.</p>
+					    	<p class="text-center h4">If you don't have curbside pickup, or want to earn some fucking free money, find your nearest recycling center here.</p>
+				    	</div>
+				 	</div>
+				    <div class="row collapse" id="mzRecycling">
+				    	<div class="col-md-6 col-md-offset-3">
+					    	<p class="text-center h3">Question #3: Why the fuck haven't you recycled it yet?</p>
+					    	<p class="text-center h1">YUP. IT'S FUCKING RECYCLABLE.</p>
+					    	<br>
+					    	<p class="text-center h4">Yes, your latest fucking celebrity gossip is recyclable, glossy or not.</p>
+					    	<p class="text-center h4">When recycled, magazines can be turned into other paper products.</p>
+					    	<br>
+					    	<p class="text-center h4">Most community recycling programs offer curbside pickup for paper products.</p>
+					    	<p class="text-center h4">If you don't have curbside pickup, or want to earn some fucking free money, find your nearest recycling center here.</p>
+					    </div>
+				    </div>
+				    <div class="row collapse" id="npRecycling">
+				    	<div class="col-md-6 col-md-offset-3">
+					    	<p class="text-center h3">Question #3: Why the fuck haven't you recycled it yet?</p>
+					    	<p class="text-center h1">YUP. IT'S FUCKING RECYCLABLE.</p>
+					    	<br>
+					    	<p class="text-center h4">After carrying your newspaper around all day so you look like an intellectual, recycle that shit.</p>
+					    	<p class="text-center h4">When recycled, newspapers can be turned into other paper products.</p>
+					    	<br>
+					    	<p class="text-center h4">Most community recycling programs offer curbside pickup for paper products.</p>
+					    	<p class="text-center h4">If you don't have curbside pickup, or want to earn some fucking free money, find your nearest recycling center here.</p>
+					    </div>
+				    </div>
+				    <div class="row collapse" id="pbRecycling">
+				    	<div class="col-md-6 col-md-offset-3">
+					    	<p class="text-center h3">Question #3: Why the fuck haven't you recycled it yet?</p>
+					    	<p class="text-center h1">YUP. IT'S FUCKING RECYCLABLE.</p>
+					    	<br>
+					    	<p class="text-center h4">Paperboard is the shit that your Captain Crunch came in. And guess what: it's fucking recyclable.</p>
+					    	<p class="text-center h4">When recycled, paperboard can be turned into other paper products.</p>
+					    	<br>
+					    	<p class="text-center h4">Most community recycling programs offer curbside pickup for paper products.</p>
+					    	<p class="text-center h4">If you don't have curbside pickup, or want to earn some fucking free money, find your nearest recycling center here.</p>
+					    </div>
+				    </div>
+				    <div class="row collapse" id="opRecycling">
+				   		<div class="col-md-6 col-md-offset-3">
+					    	<p class="text-center h3">Question #3: Why the fuck haven't you recycled it yet?</p>
+					    	<p class="text-center h1">YUP. IT'S FUCKING RECYCLABLE.</p>
+					    	<br>
+					    	<p class="text-center h4">Accidentally make 400 single sided copies only to have your boss tell you the presentation is cancelled? You're in luck. It's fucking recyclable.</p>
+					    	<p class="text-center h4">When recycled, office paper can be turned into other paper products.</p>
+					    	<br>
+					    	<p class="text-center h4">Most community recycling programs offer curbside pickup for paper products.</p>
+					    	<p class="text-center h4">If you don't have curbside pickup, or want to earn some fucking free money, find your nearest recycling center here.</p>
+					    </div>
+				    </div>
+				    <div class="row collapse" id="othpRecycling">
+				    	<div class="col-md-6 col-md-offset-3">
+					    	<p class="text-center h3">Question #3: Why the fuck haven't you recycled it yet?</p>
+					    	<p class="text-center h1">IT'S PROBABLY FUCKING RECYCLABLE.</p>
+					    	<br>
+					    	<p class="text-center h4"><u>Phone Books:</u></p>
+					    	<p class="text-center h5">Totally fucking recyclable!</p>
+					    	<p class="text-center h4"><u>Mail:</u></p>
+					    	<p class="text-center h5">Yep, recycle the spam!</p>
+					    	<p class="text-center h4"><u>Dairy/Juice Cartons:</u></p>
+					    	<p class="text-center h5">These cartons are coated in polyethylene. They may or may not be recyclable at curbside. Call your community curbside recycling provider and request more information.</p>
+					    	<br>
+					    	<p class="text-center h4">Most community recycling programs offer curbside pickup for paper products.</p>
+					    	<p class="text-center h4">If you don't have curbside pickup, or want to earn some fucking free money, find your nearest recycling center here.</p>
+					    </div>
+				    </div>
+				</div>
 			</div>
+
+
 		    <div class="row collapse" id="metalResults">
 		    	<div class="col-md-6 col-md-offset-3">
 		    		<p class="text-center h1"> Metals. TBD. </p>
@@ -124,7 +195,7 @@
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','http:////www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-60141925-1', 'auto');
   ga('send', 'pageview');
