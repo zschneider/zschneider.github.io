@@ -81,7 +81,7 @@ function initialize() {
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	    pos = new google.maps.LatLng(position.coords.latitude,
 	                                     position.coords.longitude);
-		var request = {
+		request = {
     		location: pos,
     		radius: 25000,
     		keyword: 'ewaste electronics recycling'
