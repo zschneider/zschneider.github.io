@@ -71,6 +71,7 @@
 var map;
 var infowindow;
 var pos;
+var request;
 
 function initialize() {
 
@@ -80,6 +81,12 @@ function initialize() {
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	    pos = new google.maps.LatLng(position.coords.latitude,
 	                                     position.coords.longitude);
+		var request = {
+    		location: pos,
+    		radius: 25000,
+    		keyword: 'ewaste electronics recycling'
+    	};
+
 		});
 	}
 
@@ -88,11 +95,6 @@ function initialize() {
     	zoom: 10
   	});
 
-    var request = {
-    	location: pos,
-    	radius: 25000,
-    	keyword: 'ewaste electronics recycling'
-    };
 
   	infowindow = new google.maps.InfoWindow();
   	var service = new google.maps.places.PlacesService(map);
