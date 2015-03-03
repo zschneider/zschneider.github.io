@@ -26,6 +26,10 @@ function initialize() {
    	 	radius: '25000',
     	keyword: 'electronics recycling ewaste'
   	  };
+
+  	  service = new google.maps.places.PlacesService(map);
+  	  service.nearbySearch(request, callback);
+
     }, function() {
       handleNoGeolocation(true);
     });
@@ -33,10 +37,6 @@ function initialize() {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
   }
-  
-
-  service = new google.maps.places.PlacesService(map);
-  service.nearbySearch(request, callback);
 }
 
 
