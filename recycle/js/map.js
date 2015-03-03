@@ -70,6 +70,7 @@
 
 var map;
 var infowindow;
+var pos;
 
 function initialize() {
 
