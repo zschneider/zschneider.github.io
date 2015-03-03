@@ -79,12 +79,12 @@ function initialize() {
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	    var pos = new google.maps.LatLng(position.coords.latitude,
 	                                     position.coords.longitude);
+		}
 	}
-
 	var map = new google.maps.Map(document.getElementById('map-canvas'), {
-    center: pos,
-    zoom: 10
-  });
+    	center: pos,
+    	zoom: 10
+  	});
 
   var request = {
     location: pos,
