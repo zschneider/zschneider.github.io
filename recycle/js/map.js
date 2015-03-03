@@ -70,8 +70,6 @@
 
 var map;
 var infowindow;
-var pos;
-var request;
 
 function initialize() {
 
@@ -86,7 +84,9 @@ function initialize() {
     		radius: 25000,
     		keyword: 'ewaste electronics recycling'
     	};
-
+    	//infowindow = new google.maps.InfoWindow();
+  		var service = new google.maps.places.PlacesService(map);
+  		service.nearbySearch(request, callback);
 		});
 	}
 
@@ -94,11 +94,6 @@ function initialize() {
     	center: pos,
     	zoom: 10
   	});
-
-
-  	infowindow = new google.maps.InfoWindow();
-  	var service = new google.maps.places.PlacesService(map);
-  	service.nearbySearch(request, callback);
 }
 
 function callback(results, status) {
