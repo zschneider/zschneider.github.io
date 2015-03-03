@@ -81,7 +81,7 @@ function initialize() {
 	                                     position.coords.longitude);
 	}
 
-	map = new google.maps.Map(document.getElementById('map-canvas'), {
+	var map = new google.maps.Map(document.getElementById('map-canvas'), {
     center: pos,
     zoom: 10
   });
