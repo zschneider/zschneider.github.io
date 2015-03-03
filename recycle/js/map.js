@@ -70,6 +70,7 @@
 
 var map;
 var infowindow;
+var pos;
 
 function initialize() {
 
@@ -77,12 +78,12 @@ function initialize() {
 
 	if(navigator.geolocation) {
 	    navigator.geolocation.getCurrentPosition(function(position) {
-	    var pos = new google.maps.LatLng(position.coords.latitude,
+	    pos = new google.maps.LatLng(position.coords.latitude,
 	                                     position.coords.longitude);
 		});
 	}
 
-	var map = new google.maps.Map(document.getElementById('map-canvas'), {
+	map = new google.maps.Map(document.getElementById('map-canvas'), {
     	center: pos,
     	zoom: 10
   	});
