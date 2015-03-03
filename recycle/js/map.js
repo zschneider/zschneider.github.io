@@ -27,7 +27,16 @@ function initialize() {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
   }
+  var request = {
+    location: pos,
+    radius: '25000',
+    keyword: 'electronics recycling ewaste'
+  };
+
+  service = new google.maps.places.PlacesService(map);
+  service.nearbySearch(request, callback);
 }
+
 
 function handleNoGeolocation(errorFlag) {
   if (errorFlag) {
@@ -44,6 +53,15 @@ function handleNoGeolocation(errorFlag) {
 
   var infowindow = new google.maps.InfoWindow(options);
   map.setCenter(options.position);
+}
+
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      var place = results[i];
+      createMarker(results[i]);
+    }
+  }
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
