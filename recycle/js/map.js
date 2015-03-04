@@ -85,7 +85,7 @@ function createEwasteMarker(place) {
 	  		}
 	  	}
     	infowindow.setContent(content);
-    	infowindow.open(map_easte, this);
+    	infowindow.open(map_ewaste, this);
   	});
 }
 
