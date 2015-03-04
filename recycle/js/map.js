@@ -1,6 +1,7 @@
 var map;
 var infowindow;
 var pos;
+var markerarray = [];
 
 function initialize() {
 
@@ -39,7 +40,13 @@ function callback_reg(results, status) {
 	var color = "blue";
   	if (status == google.maps.places.PlacesServiceStatus.OK) {
     	for (var i = 0; i < results.length; i++) {
-      		createMarker(results[i], color);
+    		if ($.inArray(results[i],maerkerarray)) {
+    			createMarker(results[i], "purple");
+    		}
+    		else {
+      			createMarker(results[i], color);
+      			markerarray[markerarray.length] = results[i];
+      		}
     	}
   	}
 }
@@ -48,7 +55,13 @@ function callback_green(results, status) {
 	var color = "green";
   	if (status == google.maps.places.PlacesServiceStatus.OK) {
     	for (var i = 0; i < results.length; i++) {
-      		createMarker(results[i], color);
+      		if ($.inArray(results[i],maerkerarray)) {
+    			createMarker(results[i], "purple");
+    		}
+    		else {
+      			createMarker(results[i], color);
+      			markerarray[markerarray.length] = results[i];
+      		}
     	}
   	}
 }
@@ -65,6 +78,8 @@ function createMarker(place, color) {
   		marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
   	} else if (color == "blue") {
   		marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+  	} else if (color == "purple") {
+  		marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
   	}
 
   	infowindow = new google.maps.InfoWindow();
