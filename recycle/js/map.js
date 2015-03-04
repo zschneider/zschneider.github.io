@@ -36,7 +36,7 @@ function initialize() {
 
 
 function callback_reg(results, status) {
-	var color = "red";
+	var color = "blue";
   	if (status == google.maps.places.PlacesServiceStatus.OK) {
     	for (var i = 0; i < results.length; i++) {
       		createMarker(results[i], color);
@@ -60,9 +60,11 @@ function createMarker(place, color) {
     	map: map,
     	position: place.geometry.location
   	});
-  	
+
   	if (color == "green") {
   		marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+  	} else if (color == "blue") {
+  		marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');)
   	}
 
   	infowindow = new google.maps.InfoWindow();
