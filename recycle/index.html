@@ -410,10 +410,14 @@
     <h3 class="text-center">Where the fuck are you?</h3>
     <div id="hidemaps">
     	<div class="panel" id="maps">
-    		<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#map-ewaste" data-parent="#hidemaps">e-Waste</button>
-    		<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#map-reg" data-parent="#hidemaps">Regular Recycling</button>
-    		<div id="map-ewaste" class="collapse col-md-6 col-md-offset-3"></div>
-    		<div id="map-reg" class="collapse col-md-6 col-md-offset-3"></div>
+    		<div class="row">
+    			<button type="button" class="btn btn-default col-md-6 col-md-offset-3" data-toggle="collapse" data-target="#map-ewaste" data-parent="#hidemaps">e-Waste</button>
+    			<button type="button" class="btn btn-default col-md-6" data-toggle="collapse" data-target="#map-reg" data-parent="#hidemaps">Regular Recycling</button>
+    		</div>
+    		<div class="row">
+    			<div id="map-ewaste" class="collapse col-md-6 col-md-offset-3"></div>
+    			<div id="map-reg" class="collapse col-md-6 col-md-offset-3"></div>
+    		</div>
     	</div>
     </div>
 
