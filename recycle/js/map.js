@@ -20,7 +20,6 @@ function initialize() {
     		center: pos,
     		zoom: 10
   		});
-    	infowindow = new google.maps.InfoWindow();
   		
   		var service = new google.maps.places.PlacesService(map);
   		service.nearbySearch(request, callback);
@@ -46,7 +45,6 @@ function newMap() {
     		center: pos,
     		zoom: 10
   		});
-    	infowindow = new google.maps.InfoWindow();
   		
   		var service = new google.maps.places.PlacesService(map);
   		service.nearbySearch(request, callback);
@@ -68,6 +66,8 @@ function createMarker(place) {
     	map: map,
     	position: place.geometry.location
   	});
+
+  	infowindow = new google.maps.InfoWindow();
 
   	google.maps.event.addListener(marker, 'click', function() {
   		var content = '<p><b>'+
