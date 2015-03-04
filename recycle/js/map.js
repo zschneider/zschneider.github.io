@@ -114,12 +114,18 @@ function createMarker(place) {
   	});
 
   	google.maps.event.addListener(marker, 'click', function() {
-  		var content = place.name +
-  			'<br>'+
+  		var content = '<p><b>'+
+  			place.name +
+  			'</b></p>'+
+  			'<p>'+
   			place.vicinity+
-  			'<br>'+
-  			'Open Now?    '+
-  			place.opening_hours.open_now;
+  			'</p>'
+  		if (place.opening_hours.open_now) {
+  			content.concat("<p class='green'>Open Now!</p>");
+  		}
+  		else {
+  			content.concat("<p class='red'>Currently closed.</p>");
+  		}
     	infowindow.setContent(content);
     	infowindow.open(map, this);
   	});
