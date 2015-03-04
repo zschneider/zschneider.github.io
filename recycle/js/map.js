@@ -40,12 +40,12 @@ function callback_reg(results, status) {
 	var color = "blue";
   	if (status == google.maps.places.PlacesServiceStatus.OK) {
     	for (var i = 0; i < results.length; i++) {
-    		if ($.inArray(results[i],markerarray)) {
+    		if ($.inArray(results[i].place_id,markerarray)) {
     			createMarker(results[i], "purple");
     		}
     		else {
       			createMarker(results[i], color);
-      			markerarray[markerarray.length] = results[i];
+      			markerarray[markerarray.length] = results[i].place_id;
       		}
     	}
   	}
@@ -55,12 +55,12 @@ function callback_green(results, status) {
 	var color = "green";
   	if (status == google.maps.places.PlacesServiceStatus.OK) {
     	for (var i = 0; i < results.length; i++) {
-      		if ($.inArray(results[i],markerarray)) {
+      		if ($.inArray(results[i].place_id,markerarray)) {
     			createMarker(results[i], "purple");
     		}
     		else {
       			createMarker(results[i], color);
-      			markerarray[markerarray.length] = results[i];
+      			markerarray[markerarray.length] = results[i].place_id;
       		}
     	}
   	}
