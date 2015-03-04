@@ -16,7 +16,7 @@ function initialize() {
     		keyword: 'ewaste electronics recycling'
     	};
 
-    	map = new google.maps.Map(document.getElementById('map-ewaste'), {
+    	map = new google.maps.Map(document.getElementById('map-canvas'), {
     		center: pos,
     		zoom: 10
   		});
