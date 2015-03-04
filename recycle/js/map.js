@@ -119,4 +119,10 @@ function createMarker(place) {
   	});
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+//google.maps.event.addDomListener(window, 'load', initialize);
+$('#ewastediv').on('shown.bs.collapse', function (e) {
+    initialize();
+    })
+$('#regdiv').on('shown.bs.collapse', function (e) {
+    initialize();
+    })
