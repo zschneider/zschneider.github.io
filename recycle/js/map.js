@@ -120,7 +120,7 @@ function createMarker(place) {
   			'<p>'+
   			place.vicinity+
   			'</p>'
-  		if (place.opening_hours.open_now) {
+  		if (place.opening_hours.open_now == 'false') {
   			content.concat("<p class='green'>Open Now!</p>");
   		}
   		else {
