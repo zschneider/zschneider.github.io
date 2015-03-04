@@ -19,6 +19,6 @@ body {
 	height: 50%;
 }
 
-#maps {
-	height: 60%;
+#hidemaps {
+	height: 100%;
 }
