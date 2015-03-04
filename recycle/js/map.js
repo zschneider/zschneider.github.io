@@ -10,11 +10,17 @@ function initialize() {
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	    pos = new google.maps.LatLng(position.coords.latitude,
 	                                     position.coords.longitude);
-		request = {
+		request_ewaste = {
     		location: pos,
     		radius: 25000,
     		keyword: 'ewaste electronics recycling'
     	};
+
+    	request_reg = {
+    		location: pos,
+    		radius: 25000,
+    		keyword: 'recycle recycling'
+    	}
 
     	map = new google.maps.Map(document.getElementById('map-canvas'), {
     		center: pos,
@@ -22,27 +28,42 @@ function initialize() {
   		});
   		
   		var service = new google.maps.places.PlacesService(map);
-  		service.nearbySearch(request, callback);
+  		service.nearbySearch(request_reg, callback_reg);
+  		service.nearbySearch(request_ewaste, callback_green);
 		});
 	}
 }
 
 
-function callback(results, status) {
+function callback_reg(results, status) {
+	var color = "red";
   	if (status == google.maps.places.PlacesServiceStatus.OK) {
     	for (var i = 0; i < results.length; i++) {
-      		createMarker(results[i]);
+      		createMarker(results[i], color);
+    	}
+  	}
+}
+
+function callback_green(results, status) {
+	var color = "green";
+  	if (status == google.maps.places.PlacesServiceStatus.OK) {
+    	for (var i = 0; i < results.length; i++) {
+      		createMarker(results[i], color);
     	}
   	}
 }
 
 
-function createMarker(place) {
+function createMarker(place, color) {
   	var placeLoc = place.geometry.location;
   	var marker = new google.maps.Marker({
     	map: map,
     	position: place.geometry.location
   	});
+  	
+  	if (color == "green") {
+  		marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+  	}
 
   	infowindow = new google.maps.InfoWindow();
 
