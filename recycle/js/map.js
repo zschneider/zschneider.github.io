@@ -120,11 +120,11 @@ function createMarker(place) {
   			'<p>'+
   			place.vicinity+
   			'</p>'
-  		if (place.opening_hours.open_now == 'false') {
-  			content.concat("<p class='green'>Open Now!</p>");
+  		if (place.opening_hours.open_now) {
+  			content = content+"<p class='green'>Open Now!</p>";
   		}
   		else {
-  			content.concat("<p class='red'>Currently closed.</p>");
+  			content = content+"<p class='red'>Currently closed.</p>";
   		}
     	infowindow.setContent(content);
     	infowindow.open(map, this);
