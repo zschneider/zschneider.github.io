@@ -64,7 +64,7 @@ function createMarker(place, color) {
   	if (color == "green") {
   		marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
   	} else if (color == "blue") {
-  		marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');)
+  		marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
   	}
 
   	infowindow = new google.maps.InfoWindow();
