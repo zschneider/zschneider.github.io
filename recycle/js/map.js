@@ -40,7 +40,7 @@ function callback_reg(results, status) {
 	var color = "blue";
   	if (status == google.maps.places.PlacesServiceStatus.OK) {
     	for (var i = 0; i < results.length; i++) {
-    		if ($.inArray(results[i].place_id,markerarray)) {
+    		if ($.inArray(results[i].place_id,markerarray) >= -1) {
     			createMarker(results[i], "purple");
     		}
     		else {
@@ -55,7 +55,7 @@ function callback_green(results, status) {
 	var color = "green";
   	if (status == google.maps.places.PlacesServiceStatus.OK) {
     	for (var i = 0; i < results.length; i++) {
-      		if ($.inArray(results[i].place_id,markerarray)) {
+      		if ($.inArray(results[i].place_id,markerarray) >= -1) {
     			createMarker(results[i], "purple");
     		}
     		else {
