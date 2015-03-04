@@ -10,3 +10,8 @@ html {
 body {
 	height: 100%;
 }
+
+#maplegend {
+	background: white;
+	padding: 10px;
+}

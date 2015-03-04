@@ -27,6 +27,10 @@ function initialize() {
     		center: pos,
     		zoom: 10
   		});
+
+    	// create legend
+  		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
+  			document.getElementById('legend'));
   		
   		var service = new google.maps.places.PlacesService(map);
   		service.nearbySearch(request_reg, callback_reg);
