@@ -93,7 +93,7 @@ function initialize() {
     	infowindow = new google.maps.InfoWindow();
   		
   		var service = new google.maps.places.PlacesService(map);
-  		service.getDetails(request, callback);
+  		service.nearbySearch(request, callback);
 		});
 	}
 }
@@ -115,6 +115,8 @@ function createMarker(place) {
 
   	google.maps.event.addListener(marker, 'click', function() {
     	infowindow.setContent(place.name);
+    	infowindow.setContent(place.vicinity);
+    	infowindow.setContent(place.open_now);
     	infowindow.open(map, this);
   	});
 }
