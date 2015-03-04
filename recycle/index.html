@@ -412,18 +412,23 @@
     	<div class="panel" id="maps">
     		<div class="row">
     			<div class="col-md-2 col-md-offset-4">
-		    		<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#map-ewaste" data-parent="#hidemaps">eWaste</button>
+		    		<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#ewastediv" data-parent="#hidemaps">eWaste</button>
 		    	</div>
 		    	<div class="col-md-2">
-		    		<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#map-reg" data-parent="#hidemaps">Regular Recycling</button>
+		    		<button type="button" class="btn btn-default btn-lg btn-block" data-toggle="collapse" aria-expanded="false" data-target="#regdiv" data-parent="#hidemaps">Regular Recycling</button>
 		    	</div>
     		</div>
-    		<div class="collapse row">
+    		<div class="collapse row" id="ewastediv">
     			<div class="col-md-6 col-md-offset-3">
     				<div id="map-ewaste"></div>
+    			</div>
+    		</div>
+    		<div class="collapse row" id="regdiv">
+    			<div class="col-md-6 col-md-offset-3">
     				<div id="map-reg"></div>
     			</div>
     		</div>
+    		
     	</div>
     </div>
 
