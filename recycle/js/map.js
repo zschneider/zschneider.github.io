@@ -114,9 +114,13 @@ function createMarker(place) {
   	});
 
   	google.maps.event.addListener(marker, 'click', function() {
-    	infowindow.setContent(place.name);
-    	infowindow.setContent(place.vicinity);
-    	infowindow.setContent(place.open_now);
+  		var content = place.name +
+  			'<br>'+
+  			place.vicinity+
+  			'<br>'+
+  			'Open Now?    '+
+  			place.open_now;
+    	infowindow.setContent(content);
     	infowindow.open(map, this);
   	});
 }
