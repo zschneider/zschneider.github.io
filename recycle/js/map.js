@@ -90,7 +90,8 @@ function initialize() {
     		center: pos,
     		zoom: 10
   		});
-    	//infowindow = new google.maps.InfoWindow();
+    	infowindow = new google.maps.InfoWindow();
+  		
   		var service = new google.maps.places.PlacesService(map);
   		service.nearbySearch(request, callback);
 		});
