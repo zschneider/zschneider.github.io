@@ -91,5 +91,5 @@ function createMarker(place) {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-//google.maps.event.addDomListener(document.getElementById('reg_rec'), 'click', newMap);
+google.maps.event.addDomListener(document.getElementById('reg_rec'), 'click', newMap);
 //google.maps.event.addDomListener(document.getElementById('ewaste'), 'click', initialize);
