@@ -120,12 +120,15 @@ function createMarker(place) {
   			'<p>'+
   			place.vicinity+
   			'</p>'
-  		if (place.opening_hours.open_now) {
-  			content = content+"<p class='text-success'>Open Now!</p>";
-  		}
-  		else {
-  			content = content+"<p class='text-danger'>Currently closed.</p>";
-  		}
+  		if (typeof place.opening_hours != 'undefined' && 
+  			typeof place.opening_hours.open_now != 'undefined') {
+ 	  		if (place.opening_hours.open_now) {
+	  			content = content+"<p class='text-success'>Open Now!</p>";
+	  		}
+	  		else {
+	  			content = content+"<p class='text-danger'>Currently closed.</p>";
+	  		}
+	  	}
     	infowindow.setContent(content);
     	infowindow.open(map, this);
   	});
