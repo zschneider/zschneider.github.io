@@ -11,6 +11,10 @@ body {
 	height: 100%;
 }
 
-#map-canvas {
+#map-ewaste {
+	height: 50%;
+}
+
+#map-reg {
 	height: 50%;
 }
