@@ -119,7 +119,7 @@ function createMarker(place) {
   			place.vicinity+
   			'<br>'+
   			'Open Now?    '+
-  			place.open_now;
+  			place.opening_hours.open_now;
     	infowindow.setContent(content);
     	infowindow.open(map, this);
   	});
