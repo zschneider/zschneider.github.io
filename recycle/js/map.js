@@ -29,6 +29,14 @@ function initialize() {
   		});
 
     	// create legend
+    	var legend = document.createElement('div');
+        legend.id = 'legend';
+        var content = [];
+        content.push('<img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" /><b>Fucking EWaste Centers</b>');
+  		content.push('<img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" /><b>Fucking Recycling Centers</b>');
+  		content.push('<img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" /><b>Fucking Both, Fuck</b>');
+  		legend.innerHTML = content.join('');
+        legend.index = 1;
   		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
   			document.getElementById('legend'));
   		
