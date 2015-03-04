@@ -22,7 +22,7 @@ function initialize() {
   		});
   		
   		var service = new google.maps.places.PlacesService(map);
-  		service.nearbySearch(request_ewaste, callback);
+  		service.nearbySearch(request, callback);
 		});
 	}
 }
