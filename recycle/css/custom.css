@@ -12,6 +12,7 @@ body {
 }
 
 #legend {
-	background: white;
-	padding: 10px;
+	background: lightgoldenrodyellow;
+	padding: 5px;
+	border: 2px solid black;
 }
