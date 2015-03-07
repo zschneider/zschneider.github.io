@@ -5,49 +5,79 @@ var markerarray = [];
 
 function initialize() {
 
-  //var pyrmont = new google.maps.LatLng(-33.8665433, 151.1956316);
+  var pyrmont = new google.maps.LatLng(-33.8665433, 151.1956316);
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+        zoom: 10,
+        center: pyrmont
+      });
+
+  var legend = document.createElement('div');
+  document.body.appendChild(legend);
+  legend.id = 'legend';
+  var content = [];
+  content.push('<p><img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" /><b>Fucking EWaste Centers</b></p>');
+  content.push('<p><img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" /><b>Fucking Recycling Centers</b></p>');
+  content.push('<p><img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" /><b>Fucking Both, Fuck</b></p>');
+  legend.innerHTML = content.join('');
+  legend.index = 1;
+  map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
+    document.getElementById('legend'));
 
 	if(navigator.geolocation) {
-	    navigator.geolocation.getCurrentPosition(function(position) {
-	    pos = new google.maps.LatLng(position.coords.latitude,
-	                                     position.coords.longitude);
-		request_ewaste = {
-    		location: pos,
-    		radius: 25000,
-    		keyword: 'ewaste electronics recycling'
-    	};
+    navigator.geolocation.getCurrentPosition(function(position) {
+      pos = new google.maps.LatLng(position.coords.latitude,
+                                       position.coords.longitude);
+      map.setCenter(pos);
 
-    	request_reg = {
-    		location: pos,
-    		radius: 25000,
-    		keyword: 'recycle recycling'
-    	}
+      request_ewaste = {
+        location: pos,
+        radius: 25000,
+        keyword: 'ewaste electronics recycling'
+      };
 
-    	map = new google.maps.Map(document.getElementById('map-canvas'), {
-    		center: pos,
-    		zoom: 10
-  		});
+      request_reg = {
+        location: pos,
+        radius: 25000,
+        keyword: 'recycle recycling'
+      };
+  // create legend
+  
+      var service = new google.maps.places.PlacesService(map);
+      service.nearbySearch(request_reg, callback_reg);
+      service.nearbySearch(request_ewaste, callback_green);
+    }, handleNoGeolocation());
+  }
+  else {
+    handleNoGeolocation();
+  }
 
-    	// create legend
-    	var legend = document.createElement('div');
-      document.body.appendChild(legend);
-      legend.id = 'legend';
-      var content = [];
-      content.push('<p><img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" /><b>Fucking EWaste Centers</b></p>');
-  		content.push('<p><img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" /><b>Fucking Recycling Centers</b></p>');
-  		content.push('<p><img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" /><b>Fucking Both, Fuck</b></p>');
-  		legend.innerHTML = content.join('');
-      legend.index = 1;
-  		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
-  			document.getElementById('legend'));
-  		
-  		var service = new google.maps.places.PlacesService(map);
-  		service.nearbySearch(request_reg, callback_reg);
-  		service.nearbySearch(request_ewaste, callback_green);
-		});
-	}
+  var autocomplete = new google.maps.places.Autocomplete(
+    (document.getElementById('autocomplete')),
+    {
+      types: ['(cities)'],
+    });
 }
 
+function handleNoGeolocation() {
+  pos = new google.maps.LatLng(50, -122.272747);
+
+  map.setCenter(pos);
+  request_ewaste = {
+    location: pos,
+    radius: 25000,
+    keyword: 'ewaste electronics recycling'
+  };
+
+  request_reg = {
+    location: pos,
+    radius: 25000,
+    keyword: 'recycle recycling'
+  };
+
+  var service = new google.maps.places.PlacesService(map);
+  service.nearbySearch(request_reg, callback_reg);
+  service.nearbySearch(request_ewaste, callback_green);
+}
 
 function callback_reg(results, status) {
 	var color = "blue";
@@ -119,3 +149,17 @@ function createMarker(place, color) {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
+$(document).ready(function(){
+  $("#allMapStuff").css({ opacity: 0, zoom: 0 });
+  $('#showMap').click(function(){
+  //google.maps.event.trigger(map, 'resize');
+  //map.setCenter(pos);
+  //map.fitBounds(pos);
+    if( $("#allMapStuff").css('opacity') == 0) {
+      $("#allMapStuff").css({ opacity: 1, zoom: 1 });
+    }
+    else{
+      $("#allMapStuff").css({ opacity: 0, zoom: 0 });
+    }     
+  });
+});
