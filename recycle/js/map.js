@@ -149,8 +149,8 @@ function createMarker(place, color) {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-// $(document).ready(function(){
-//   $("#allMapStuff").css({ opacity: 0, zoom: 0 });
+$(document).ready(function(){
+   $("#allMapStuff").css({ opacity: 1, zoom: 1 });
 //   $('#showMap').click(function(){
 //   //google.maps.event.trigger(map, 'resize');
 //   //map.setCenter(pos);
@@ -162,4 +162,4 @@ google.maps.event.addDomListener(window, 'load', initialize);
 //       $("#allMapStuff").css({ opacity: 0, zoom: 0 });
 //     }     
 //   });
-// });
+});
