@@ -39,7 +39,7 @@ function initialize() {
     navigator.geolocation.getCurrentPosition(function(position) {
       pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
-      map.setZoom(17);
+      map.setZoom(10);
       map.setCenter(pos);
     }, handleNoGeolocation());
   }
