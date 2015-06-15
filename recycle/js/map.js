@@ -2,6 +2,7 @@ var map;
 var infowindow;
 var pos;
 var markerarray = [];
+var search_type = 0;
 
 function initialize() {
 
@@ -11,123 +12,159 @@ function initialize() {
         center: pyrmont
       });
 
-  var legend = document.createElement('div');
-  document.body.appendChild(legend);
-  legend.id = 'legend';
-  var content = [];
-  content.push('<p><img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" /><b>Fucking EWaste Centers</b></p>');
-  content.push('<p><img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" /><b>Fucking Recycling Centers</b></p>');
-  content.push('<p><img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" /><b>Fucking Both, Fuck</b></p>');
-  legend.innerHTML = content.join('');
-  legend.index = 1;
-  map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
-    document.getElementById('legend'));
+  service = new google.maps.places.PlacesService(map);
+
+  var input = /** @type {HTMLInputElement} */(
+      document.getElementById('autocomplete'));
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  var autocomplete = new google.maps.places.Autocomplete(
+    (input),
+    {
+      types: ['(cities)'],
+    });
+
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    var place = autocomplete.getPlace();
+    clearAllMarkers();
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17);  // Why 17? Because it looks good.
+    }
+    performSearch();
+  });
 
 	if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
       map.setCenter(pos);
-
-      request_ewaste = {
-        location: pos,
-        radius: 25000,
-        keyword: 'ewaste electronics recycling'
-      };
-
-      request_reg = {
-        location: pos,
-        radius: 25000,
-        keyword: 'recycle recycling'
-      };
-  // create legend
-  
-      var service = new google.maps.places.PlacesService(map);
-      service.nearbySearch(request_reg, callback_reg);
-      service.nearbySearch(request_ewaste, callback_green);
     }, handleNoGeolocation());
   }
   else {
     handleNoGeolocation();
   }
-
-  var autocomplete = new google.maps.places.Autocomplete(
-    (document.getElementById('autocomplete')),
-    {
-      types: ['(cities)'],
-    });
+  google.maps.event.addListener(map, 'idle', performSearch);
 }
 
 function handleNoGeolocation() {
-  pos = new google.maps.LatLng(50, -122.272747);
-
+  pos = new google.maps.LatLng(39.8282, -98.5795);
   map.setCenter(pos);
+  map.setZoom(4);
+}
+
+function clearAllMarkers() {
+  console.log("HI");
+  for (var i = 0; i < markerarray.length; i++) {
+    markerarray[i].setMap(null);
+  }
+  markerarray = [];
+}
+
+function clearMarkersIfOutOfBounds() {
+  var mapBounds = map.getBounds();
+  for (var i = 0; i < markerarray.length; i++) {
+    if (!(mapBounds.contains(markerarray[i].getPosition()))) {
+      markerarray[i].setMap(null);
+    }
+  }
+}
+
+function performSearch() {
+  clearMarkersIfOutOfBounds();
+
   request_ewaste = {
     location: pos,
-    radius: 25000,
-    keyword: 'ewaste electronics recycling'
+    bounds: map.getBounds(),
+    keyword: 'ewaste e-waste electronics recycling'
   };
 
   request_reg = {
     location: pos,
-    radius: 25000,
+    bounds: map.getBounds(),
     keyword: 'recycle recycling'
-  };
+  };  
 
-  var service = new google.maps.places.PlacesService(map);
-  service.nearbySearch(request_reg, callback_reg);
-  service.nearbySearch(request_ewaste, callback_green);
+  if (search_type == 0) {
+    service.nearbySearch(request_reg, callback);
+  }
+  else {
+    service.nearbySearch(request_ewaste, callback);
+  }
 }
 
-function callback_reg(results, status) {
-	var color = "blue";
-  	if (status == google.maps.places.PlacesServiceStatus.OK) {
-    	for (var i = 0; i < results.length; i++) {
-    		if ($.inArray(results[i].place_id,markerarray) > -1) {
-    			createMarker(results[i], "purple");
-    		}
-    		else {
-      			createMarker(results[i], color);
-      			markerarray[markerarray.length] = results[i].place_id;
-      		}
-    	}
-  	}
+function callback(results, status) {
+  var index_reg = -1;
+
+	if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      // check if this place already has a marker.
+      for (var j = 0; j < markerarray.length; j++) {
+        if ((markerarray[j] != null) && 
+            (results[i].geometry.location.A == markerarray[j].position.A) &&
+            (results[i].geometry.location.F == markerarray[j].position.F)) {
+          index_reg = j;
+          break;
+        }
+      }
+      if (!(index_reg > -1)) {
+        markerarray[markerarray.length] = createMarker(results[i]);
+      }
+    }
+  }
 }
 
-function callback_green(results, status) {
-	var color = "green";
-  	if (status == google.maps.places.PlacesServiceStatus.OK) {
-    	for (var i = 0; i < results.length; i++) {
-      		if ($.inArray(results[i].place_id,markerarray) > -1) {
-    			createMarker(results[i], "purple");
-    		}
-    		else {
-      			createMarker(results[i], color);
-      			markerarray[markerarray.length] = results[i].place_id;
-      		}
-    	}
-  	}
-}
-
-
-function createMarker(place, color) {
+function createMarker(place) {
   	var placeLoc = place.geometry.location;
   	var marker = new google.maps.Marker({
     	map: map,
-    	position: place.geometry.location
+    	position: place.geometry.location,
   	});
 
-  	if (color == "green") {
-  		marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
-  	} else if (color == "blue") {
-  		marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
-  	} else if (color == "purple") {
-  		marker.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
-  	}
+  	marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
 
   	infowindow = new google.maps.InfoWindow();
 
-  	google.maps.event.addListener(marker, 'click', function() {
+    var place_request = {
+        placeId: place.place_id
+      };
+
+    google.maps.event.addListener(marker, 'click', function() {
+      service.getDetails(place_request, function(place, status) {
+        var content = '<p><b>'+
+          place.name +
+          '</b></p>'+
+          '<p>'+
+          place.formatted_address +
+          '</p> <p>' + 
+          place.formatted_phone_number +
+          '</p>'
+        if (typeof place.website != 'undefined') {
+          content = content+"<p><a href="+place.website+">"+place.website+"</a></p>"
+        }
+        if (typeof place.opening_hours != 'undefined' && 
+          typeof place.opening_hours.open_now != 'undefined') {
+            var d = new Date();
+
+            if (place.opening_hours.open_now) {
+              content = content+"<p class='text-success'>"+place.opening_hours.weekday_text[d.getDay()]+"</p>";
+            }
+            else {
+              content = content+"<p class='text-danger'>"+place.opening_hours.weekday_text[d.getDay()]+"</p>";
+            }   
+          }
+        infowindow.setContent(content);
+
+        });
+        infowindow.open(map, this);
+      });
+
+      
+  	// google.maps.event.addListener(marker, 'click', function() {
+   //    // get place details.
+    
+
   		var content = '<p><b>'+
   			place.name +
   			'</b></p>'+
@@ -143,23 +180,23 @@ function createMarker(place, color) {
 	  			content = content+"<p class='text-danger'>Currently closed.</p>";
 	  		}
 	  	}
-    	infowindow.setContent(content);
-    	infowindow.open(map, this);
-  	});
+   //  	infowindow.setContent(content);
+   //  	infowindow.open(map, this);
+  	// });
+    return marker;
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
 $(document).ready(function(){
    $("#allMapStuff").css({ opacity: 1, zoom: 1 });
-//   $('#showMap').click(function(){
-//   //google.maps.event.trigger(map, 'resize');
-//   //map.setCenter(pos);
-//   //map.fitBounds(pos);
-//     if( $("#allMapStuff").css('opacity') == 0) {
-//       $("#allMapStuff").css({ opacity: 1, zoom: 1 });
-//     }
-//     else{
-//       $("#allMapStuff").css({ opacity: 0, zoom: 0 });
-//     }     
-//   });
+   $("#regRecycling").click(function() {
+    search_type = 0;
+    clearAllMarkers();
+    performSearch();
+   });
+   $("#eRecycling").click(function() {
+    search_type = 1;
+    clearAllMarkers();
+    performSearch();
+   });
 });
