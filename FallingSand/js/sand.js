@@ -80,8 +80,7 @@ Particle.prototype.update = function () {
     this.graphics.clear()
     this.graphics.beginFill(0x66FF99);
     this.graphics.drawRect(this.shape.position[0], this.shape.position[1], PART_SIZE, PART_SIZE);
-    console.log(this.graphics.position.y);
-    console.log(this.graphics.position.x);
+
 
     // if (this.y > CANVAS_HEIGHT) {
     //     more = false;
