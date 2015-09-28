@@ -1,14 +1,16 @@
 var stage;
 var canvas;
+var renderer;
+var world;
 var grid;
 
 // constants
-var MOUSE_WIDTH = 20;
-var MOUSE_HEIGHT = 10;
+var MOUSE_WIDTH = 10;
+var MOUSE_HEIGHT = 5;
 var STARTING_HEIGHT = 1;
 var FALLING_SPEED = 1;
 var PART_SIZE = 1;
-var CREATION_SPEED = 20;
+var CREATION_SPEED = 10;
 
 
 // mouse spout
@@ -21,12 +23,14 @@ var drop = true;
 // screen spout
 var SPOUT_CREATION = false;
 var SPOUT_WIDTH = 60;
-var more = true;
+
 
 // lol these shouldnt be here
 var particle_list = [];
 var current_iter = 0;
+var more = true;
 var up_count = 0;
+var listener;
 var mousex;
 var mousey;
 
@@ -35,6 +39,7 @@ var pixel;
 
 // Initialization functions
 function init() {
+    
     canvas = document.getElementById("game-canvas");
     stage = new createjs.SpriteStage(canvas);
     drop = false;
@@ -43,7 +48,7 @@ function init() {
         stage.on("stagemouseup", stop_dropping);
         stage.on("stagemousemove", track_mouse);
     }
-    set_up_pixel("#FFFFCC");
+    set_up_pixel("DeepSkyBlue");
     grid = new Array(canvas.width * canvas.height);
 
     // create grid with boundaries
@@ -61,7 +66,7 @@ function init() {
     }
     // set up mouse events
     createjs.Ticker.setFPS(24);
-    createjs.Ticker.addEventListener("tick", game_update);
+    createjs.Ticker.addEventListener("tick", update);
 }
 
 function set_up_pixel(color) {
@@ -92,16 +97,18 @@ function stop_dropping(event) {
 }
 
 function track_mouse(event) {
-    mousex = event.stageX + .5;
+    mousex = event.stageX;
     mousey = event.stageY;
 }
 
 // Game loop
-function game_update() {
+function update() {
     var cur_fps = createjs.Ticker.getMeasuredFPS();
     if (cur_fps < 18) {
         more = false;
-        console.log("Slowdowns at " + particle_list.length + " particles.");
+        console.log("No more sand with " + particle_list.length + " particles.");
+    } else {
+        more = true;
     }
 
     up_count++; // randomness checker
@@ -120,6 +127,7 @@ function game_update() {
         for (i = 0; i < CREATION_SPEED; i++) {    
             var x = mousex + Math.floor((Math.random()*MOUSE_WIDTH)-MOUSE_WIDTH/2);
             var y = mousey + Math.floor((Math.random()*MOUSE_HEIGHT)-MOUSE_HEIGHT/2);
+
             if (grid[convert_xy_to_index(x, y)] === -10) {
                 var particle = new Particle(x, y);
                 stage.addChild(particle.shape);
