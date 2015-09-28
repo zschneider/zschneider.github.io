@@ -37,6 +37,7 @@ var pixel;
 function init() {
     canvas = document.getElementById("game-canvas");
     stage = new createjs.SpriteStage(canvas);
+    creatjs.Touch.enable(stage);
     drop = false;
     if (MOUSE_CREATION) {
         stage.on("stagemousedown", start_dropping);
